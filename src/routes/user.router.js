@@ -8,7 +8,7 @@ const veriifyJWT = require('../utils/verifyJWT');
 const userRouter = express.Router();
 
 userRouter.route('/')
-    .get(getAll)
+    .get(veriifyJWT, getAll)
     .post(hash, create);
 
 userRouter.route('/login')
@@ -18,8 +18,8 @@ userRouter.route('/me')
     .get(veriifyJWT, logged)
 
 userRouter.route('/:id')
-    .get(getOne)
-    .delete(remove)
-    .put(update);
+    .get(veriifyJWT, getOne)
+    .delete(veriifyJWT, remove)
+    .put(veriifyJWT, update);
 
 module.exports = userRouter;

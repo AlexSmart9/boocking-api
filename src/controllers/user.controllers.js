@@ -47,6 +47,7 @@ const login = catchError(async(req, res) => {
 
 const logged = catchError(async(req, res) => {
     const user = req.user
+    console.log(user)
     return res.json(user)
 })
 module.exports = {

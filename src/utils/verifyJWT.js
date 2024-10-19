@@ -11,7 +11,7 @@ const veriifyJWT = (req, res, next) => {
         process.env.TOKEN_SECRET,
         (err, decoded) => {
             if(err) return res.sendStatus(403)
-            req.user = decoded.user
+            req.user = decoded.userLogged
             next()
         }
     )
