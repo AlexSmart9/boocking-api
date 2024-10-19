@@ -1,15 +1,15 @@
 const jwt = require('jsonwebtoken')
 
 const sessionJWT = (req, res, next) => {
-    const user = req.userLogged
+    const userLogged = req.userLogged
 
     const token = jwt.sign(
-        {user},
+        {userLogged},
         process.env.TOKEN_SECRET,
         {expiresIn: '1d'}
     )
 
-    req.tokem = token 
+    req.token = token 
     next()
 }
 

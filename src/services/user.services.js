@@ -4,8 +4,8 @@ const getAllServices = async () => {
     return await user.findAll()
 }
 
-const createServices = async (user) => {
-    return await user.create(user)
+const createServices = async (body) => {
+    return await user.create(body)
 }
 
 const getOneServices = async (id) => {
@@ -16,11 +16,15 @@ const removeServices = async (id) => {
     return await user.destroy({where: {id}})
 }
 
-const updateServices = async (id, user) => {
+const updateServices = async (id, body) => {
     return await user.update(
-        user, 
+        body, 
         {where:{id}, returning:true}
     )
+}
+
+const loginServices = async (email) => {
+    return await user.findOne({where:{email}})
 }
 
 module.exports = {
@@ -28,5 +32,6 @@ module.exports = {
     createServices,
     getOneServices,
     removeServices,
-    updateServices
+    updateServices,
+    loginServices
 }

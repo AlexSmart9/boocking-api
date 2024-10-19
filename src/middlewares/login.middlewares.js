@@ -1,14 +1,13 @@
 const bcrypt = require('bcrypt')
-const user = require('../models/user')
-
+const { loginServices } = require('../services/user.services')
 
 const loginMiddlewares = async(req, res, next) => {
     const {email, password} = req.body
 
-    const user = await user.findOn({where: {email}})
+    const user = await loginServices(email)
     if(!user) return res.sendStatus(401).json("Invalid credentials")
 
-    const isVaid = await bcrypt.compare(password, user.password)
+    const isValid = await bcrypt.compare(password, user.password)
     if(!isValid) return res.sendStatus(401).json("Invalid credentials")
     
     req.userLogged = user
